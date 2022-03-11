@@ -14,10 +14,10 @@ export default function FooterButton({text,onPress,active}){
         );
     }else return (
         <TouchableOpacity onPress={onPress}>
-        <View style={styles.buttonNotActive}>
-            <Image source={ require (`../../assets/images/discoverIcon.png`) } style = {styles.iconNotActive}/>
-            <Text style={styles.button__textNotActive}>{text}</Text>
-        </View>
+            <View style={styles.buttonNotActive}>
+                <Image source={ require (`../../assets/images/discoverIcon.png`) } style = {styles.iconNotActive}/>
+                <Text style={styles.button__textNotActive}>{text}</Text>
+            </View>
         </TouchableOpacity>
     )
 }
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         marginRight:10
     },
     button__textActive:{
-        fontFamily: "OpenSans-SemiBold",
+        fontFamily: "OpenSansSemiBold",
         fontSize:18, 
         color:"white"
     },
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         marginRight:10
     },
     button__textNotActive:{
-        fontFamily: "OpenSans-SemiBold",
+        fontFamily: "OpenSansSemiBold",
         fontSize:18, 
         color:"black"
     }

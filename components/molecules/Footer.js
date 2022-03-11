@@ -1,15 +1,14 @@
 import React from "react";
 import { StyleSheet,View } from "react-native";
 import FooterButton from "../shared/FooterButton";
-import { useState } from "react";
 
-export default function Footer({discoverState,joinedState,onPress}){
+export default function Footer({discoverState,joinedState,onPressLeft,onPressRight}){
 
     return (
        <>
             <View style={styles.footer}>
-                <FooterButton text='Discover' active={discoverState} onPress={onPress}/>
-                <FooterButton text='Joined' active={joinedState} onPress={onPress}/>
+                <FooterButton text='Discover' active={discoverState} onPress={onPressLeft}/>
+                <FooterButton text='Joined' active={joinedState} onPress={onPressRight}/>
             </View>
        </>
     );
