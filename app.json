@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "mock-event-explorer-app",
+    
     "slug": "mock-event-explorer-app",
     "version": "1.0.0",
     "orientation": "portrait",
