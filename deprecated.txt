@@ -1,0 +1,14 @@
+
+
+/*==========================Flatlist rendering==========================*/
+
+<FlatList 
+                            data={eventList}
+                            renderItem={({item})=>(
+                                <HorizontalCard uri = {item.pic} name={item.name} date={item.date} desc = {item.info} />
+                            )}
+                            nestedScrollEnabled
+                            onEndReached={()=>{
+                               console.log("end");
+                            }}
+                       />

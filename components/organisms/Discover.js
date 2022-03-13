@@ -2,6 +2,8 @@ import React, { useEffect,useState } from "react";
 import { StyleSheet,TouchableOpacity,Text,View,ScrollView} from "react-native";
 import VerticalCard from "../molecules/VerticalCard";
 import HorizontalCard from "../molecules/HorizontalCard";
+import { FlatList } from "react-native-gesture-handler";
+import { useScrollToTop } from "@react-navigation/native";
 
 export default function Discover(){
 
@@ -12,15 +14,24 @@ export default function Discover(){
 
       /*====================================Function for calling the api======================================= */
 
+      const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
+        const paddingToBottom = 20;
+        return layoutMeasurement.height + contentOffset.y >=
+          contentSize.height - paddingToBottom;
+      };
+
+      const goToTop = () => {
+        this.scroll.scrollTo({x: 0, y: 0, animated: true});
+     }
+
     const fetchEvents = async () => {
         const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?page=${pageNumber}&size=20&apikey=pezpAKLGQDIWxy3AjRZv1CPahohddeAU`);
         let json = await response.json();
-        let tempArr = eventList;
         //console.log(JSON.stringify(json._embedded.events[0].name));
-        let tempArr2 = json._embedded.events.map((item)=>{
+        setEventList(  json._embedded.events.map((item)=>{
             let container = {};
             container.name = item.name;
-            container.id = item.id;
+            container.key = item.id;
             container.info = item.info;
             container.date = item.dates.start.localDate;
             
@@ -31,14 +42,13 @@ export default function Discover(){
                 }
             }          
             return container;
-        });
-
-        setEventList(tempArr.concat(tempArr2));
+        }));
         
         if (!loaded) {
             setLoadedState(true);
         }else{
             setPageNumber(pageNumber+1);
+            
         }
 
         console.log(eventList.length);
@@ -60,7 +70,17 @@ export default function Discover(){
     }
     else{
         return (     
-            <ScrollView style={styles.discover}>
+
+            
+            <ScrollView style={styles.discover}
+                        ref={(c) => {this.scroll = c}}
+                        onScroll ={({nativeEvent}) => {
+                            if (isCloseToBottom(nativeEvent)) {
+                                console.log("AAAA");
+                                fetchEvents();
+                                goToTop();
+                            }}}
+            >
                 
                     <View style={styles.title}>
                             <Text style={styles.popularText}>Popular</Text>
@@ -74,8 +94,11 @@ export default function Discover(){
                         <Text style={styles.upcomingText}>Upcoming Events</Text>
                     </View>
                     <View style={styles.upcomingEventsContainer}>
-                        <HorizontalCard uri = {eventList[3].pic} name={eventList[3].name} date={eventList[3].date} desc = {eventList[3].info}/>
-                        <HorizontalCard/>
+                       {
+                           eventList.map((item)=>{
+                              return  <HorizontalCard uri = {item.pic} name={item.name} date={item.date} desc = {item.info} key={item.key} />
+                           })
+                       }
                     </View>
                     
             </ScrollView>      
