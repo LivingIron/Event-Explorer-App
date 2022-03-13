@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet,TouchableOpacity,Text,View ,Image} from "react-native";
 
+
 export default function FooterButton({text,onPress,active}){
 
     if(active == true){
@@ -13,7 +14,7 @@ export default function FooterButton({text,onPress,active}){
             </TouchableOpacity>
         );
     }else return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={(onPress)}>
             <View style={styles.buttonNotActive}>
                 <Image source={ require (`../../assets/images/discoverIcon.png`) } style = {styles.iconNotActive}/>
                 <Text style={styles.button__textNotActive}>{text}</Text>

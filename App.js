@@ -1,43 +1,22 @@
 
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet} from 'react-native';
 import Header from './components/molecules/Header';
 import Footer from './components/molecules/Footer';
-import { useState } from "react";
+import Discover from './components/molecules/Discover';
+import Joined from './components/molecules/Joined';
 import { useFonts } from 'expo-font';
 import { enableScreens } from 'react-native-screens';
-import { NavigationContainer } from '@react-navigation/native';
-import {createNativeStackNavigator} from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
 
 enableScreens();
 
+export default function App({navigation}) {
 
-
-
-export default function App() {
-
-  const [discoverState,setDiscoverState]=useState(true);
-  const [joinedState,setJoinedState] = useState(false);
-
-  const switchScreenToJoined = () =>{
-    
-    if(!joinedState){
-      console.log("already there");
-    }else{
-      setDiscoverState(!discoverState);
-      setJoinedState(!joinedState);
   
-    }
-  }
-
-  const switchScreenToDiscover = () =>{
-    if(!discoverState){
-      console.log("already there");
-    }else{
-      setDiscoverState(!discoverState);
-      setJoinedState(!joinedState);
-    }
-  }
   
+  /* ==========================Font Loading=================================== */
+
   const [loaded] = useFonts({
     OpenSans: require('./assets/fonts/OpenSans-Regular.ttf'),
     OpenSansSemiBold: require('./assets/fonts/OpenSans-SemiBold.ttf')
@@ -47,14 +26,20 @@ export default function App() {
     return null;
   }
 
+  /* ===========================Stack Navigation========================== */
+
   const Stack = createNativeStackNavigator();
+
   return (
     <>
       <Header />
       <NavigationContainer>
-        
+        <Stack.Navigator screenOptions={{headerShown:false}}>       
+         <Stack.Screen name='Discover' component={Discover} />
+         <Stack.Screen name='Joined' component={Joined} />
+        </Stack.Navigator>
+        <Footer /> 
       </NavigationContainer>
-      <Footer discoverState={discoverState} joinedState={joinedState} onPressLeft={switchScreenToJoined} onPressRight={switchScreenToDiscover} />
     </>
   );
 }

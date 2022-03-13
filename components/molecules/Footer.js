@@ -1,14 +1,49 @@
 import React from "react";
 import { StyleSheet,View } from "react-native";
 import FooterButton from "../shared/FooterButton";
+import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Footer({discoverState,joinedState,onPressLeft,onPressRight}){
+
+
+
+export default function Footer(){
+
+    /* ====================State for changing screens ====================== */
+
+  const [discoverState,setDiscoverState]=useState(true);
+  const [joinedState,setJoinedState] = useState(false);
+
+  const navigation = useNavigation();
+
+  const switchScreenToJoined = () =>{ 
+    if(!joinedState){
+      console.log("already there");
+    }else{
+      setDiscoverState(!discoverState);
+      setJoinedState(!joinedState);
+     
+      navigation.navigate("Discover");
+    }
+  }
+
+  const switchScreenToDiscover = () =>{
+    if(!discoverState){
+      console.log("already there");
+    }else{
+      setDiscoverState(!discoverState);
+      setJoinedState(!joinedState);
+      navigation.navigate("Joined");
+    }
+  }
+
+ 
 
     return (
        <>
             <View style={styles.footer}>
-                <FooterButton text='Discover' active={discoverState} onPress={onPressLeft}/>
-                <FooterButton text='Joined' active={joinedState} onPress={onPressRight}/>
+                <FooterButton text='Discover' active={discoverState} onPress={switchScreenToJoined}/>
+                <FooterButton text='Joined' active={joinedState} onPress={switchScreenToDiscover}/>
             </View>
        </>
     );
