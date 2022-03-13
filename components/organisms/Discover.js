@@ -9,11 +9,15 @@ export default function Discover(){
     const [pageNumber,setPageNumber] = useState(1);
     const [loaded,setLoadedState] = useState(false);
 
-    useEffect(async ()=>{
+
+      /*====================================Function for calling the api======================================= */
+
+    const fetchEvents = async () => {
         const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?page=${pageNumber}&size=20&apikey=pezpAKLGQDIWxy3AjRZv1CPahohddeAU`);
         let json = await response.json();
-        console.log(JSON.stringify(json._embedded.events[0].name));
-        setEventList(json._embedded.events.map((item)=>{
+        let tempArr = eventList;
+        //console.log(JSON.stringify(json._embedded.events[0].name));
+        let tempArr2 = json._embedded.events.map((item)=>{
             let container = {};
             container.name = item.name;
             container.id = item.id;
@@ -27,17 +31,28 @@ export default function Discover(){
                 }
             }          
             return container;
-        }));
-        
-        if (eventList && eventList.length) {
-            setPageNumber(pageNumber+1);
-            setLoadedState(true);
-            console.log(eventList);
-            console.log(pageNumber);
-          }
-    }
-    ,[])
+        });
 
+        setEventList(tempArr.concat(tempArr2));
+        
+        if (!loaded) {
+            setLoadedState(true);
+        }else{
+            setPageNumber(pageNumber+1);
+        }
+
+        console.log(eventList.length);
+    }
+
+    /*====================================INITAL API CALL======================================= */
+
+    useEffect(()=>{
+        fetchEvents();
+    }
+    ,[loaded]);
+
+
+    /*====================================checks if page is laoded before loading the view ======================================= */
     if(!loaded){
         return (
             <Text>Loading</Text>
