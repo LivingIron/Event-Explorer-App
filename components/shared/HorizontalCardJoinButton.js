@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet,View,Text} from "react-native";
 import { TouchableOpacity } from "react-native";
 
-export default function HorizontalCardJoinButton(){
+export default function HorizontalCardJoinButton({onPress}){
 
     const [joined,setJoined] = useState(false);
 
@@ -18,7 +18,10 @@ export default function HorizontalCardJoinButton(){
         return (
             <>
                  <View style={styles.buttonNotJoined}>
-                    <TouchableOpacity onPress={ joinEvent} >
+                    <TouchableOpacity onPress={ ()=>{
+                        joinEvent();
+                        onPress();
+                    }} >
                         <Text style={styles.buttonText}>Join</Text>
                     </TouchableOpacity>
                  </View>

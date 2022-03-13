@@ -2,9 +2,21 @@ import React, { useState } from "react";
 import { StyleSheet,View,Image ,Text} from "react-native";
 import HorizontalCardEventButton from "../shared/HorizontalCardEventButton";
 import HorizontalCardJoinButton from "../shared/HorizontalCardJoinButton";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-export default function HorizontalCard({uri,date,name,desc}){
+
+
+export default function HorizontalCard({uri,date,name,desc,id}){
+
+    const addToJoined = async () =>{
+      //  try{
+        //    await AsyncStorage.setItem(id,[uri,date,name,desc,id]);
+      //  }catch(err){
+      //      console.log(err);
+      //  }
+    }
+
 
     return (
        <>
@@ -15,7 +27,7 @@ export default function HorizontalCard({uri,date,name,desc}){
                     <Text style={styles.card_title} numberOfLines={1}>{name}</Text>
                     <Text style={styles.card_desc} numberOfLines={3}>{desc}</Text>
                     <View style={styles.card_buttons}>
-                        <HorizontalCardJoinButton />
+                        <HorizontalCardJoinButton onPress ={addToJoined} />
                         <HorizontalCardEventButton  />
                     </View>
                </View>

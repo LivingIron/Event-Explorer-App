@@ -21,7 +21,7 @@ export default function Discover(){
       };
 
       const goToTop = () => {
-        this.scroll.scrollTo({x: 0, y: 0, animated: true});
+        this.scroll.scrollTo({x: 0, y: 350, animated: true});
      }
 
     const fetchEvents = async () => {
@@ -62,16 +62,14 @@ export default function Discover(){
     ,[loaded]);
 
 
-    /*====================================checks if page is laoded before loading the view ======================================= */
+    /*====================================checks if page is loaded before loading the view ======================================= */
     if(!loaded){
         return (
             <Text>Loading</Text>
         );
     }
     else{
-        return (     
-
-            
+        return (               
             <ScrollView style={styles.discover}
                         ref={(c) => {this.scroll = c}}
                         onScroll ={({nativeEvent}) => {
@@ -96,7 +94,7 @@ export default function Discover(){
                     <View style={styles.upcomingEventsContainer}>
                        {
                            eventList.map((item)=>{
-                              return  <HorizontalCard uri = {item.pic} name={item.name} date={item.date} desc = {item.info} key={item.key} />
+                              return  <HorizontalCard uri = {item.pic} name={item.name} date={item.date} desc = {item.info} key={item.key} id={item.key}/>
                            })
                        }
                     </View>
