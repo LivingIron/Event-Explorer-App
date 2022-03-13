@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         marginTop:25,
     },
     upcomingEventsContainer:{
-        flexDirection:'row',
+        flexDirection:'column',
         justifyContent:'space-around'
     },
     upcomingTextContainer:{
