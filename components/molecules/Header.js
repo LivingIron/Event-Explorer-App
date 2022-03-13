@@ -5,7 +5,7 @@ export default function Header({discoverState,joinedState,onPress}){
 
     return (
        <>
-            <View style={styles.footer}>
+            <View style={styles.header}>
 
                 <View style={styles.icon}>
                     <Image source={require('../../assets/images/Search.png')} />    
@@ -20,7 +20,7 @@ export default function Header({discoverState,joinedState,onPress}){
 }
 
 const styles = StyleSheet.create({
-    footer:{
+    header:{
        height:50,
        flexDirection: 'row',
        justifyContent: 'space-around',

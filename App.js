@@ -2,8 +2,8 @@
 import { StyleSheet} from 'react-native';
 import Header from './components/molecules/Header';
 import Footer from './components/molecules/Footer';
-import Discover from './components/molecules/Discover';
-import Joined from './components/molecules/Joined';
+import Discover from './components/organisms/Discover';
+import Joined from './components/organisms/Joined';
 import { useFonts } from 'expo-font';
 import { enableScreens } from 'react-native-screens';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';

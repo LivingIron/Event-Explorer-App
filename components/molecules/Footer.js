@@ -4,12 +4,9 @@ import FooterButton from "../shared/FooterButton";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
-
-
-
 export default function Footer(){
 
-    /* ====================State for changing screens ====================== */
+/* ====================State for changing screens ====================== */
 
   const [discoverState,setDiscoverState]=useState(true);
   const [joinedState,setJoinedState] = useState(false);
@@ -36,8 +33,6 @@ export default function Footer(){
       navigation.navigate("Joined");
     }
   }
-
- 
 
     return (
        <>
