@@ -4,16 +4,16 @@ import HorizontalCardEventButton from "../shared/HorizontalCardEventButton";
 import HorizontalCardJoinButton from "../shared/HorizontalCardJoinButton";
 
 
-export default function HorizontalCard(){
+export default function HorizontalCard({uri,date,name,desc}){
 
     return (
        <>
             <View style={styles.card}>
-               <Image source = {{uri:'https://s1.ticketm.net/dam/a/776/6e685963-bebc-4e28-80e5-db72b4915776_1339921_CUSTOM.jpg '}} style={styles.card_image}/>
+               <Image source = {{uri:uri}} style={styles.card_image}/>
                <View style={styles.card_right}>
-                    <Text style={styles.card_date}>Oct 15,2021</Text>
-                    <Text style={styles.card_title}>Car Freak Meetup</Text>
-                    <Text style={styles.card_desc}>Biggest Event in dhaka,join to see the exciment of the new car guy</Text>
+                    <Text style={styles.card_date}>{date}</Text>
+                    <Text style={styles.card_title} numberOfLines={1}>{name}</Text>
+                    <Text style={styles.card_desc} numberOfLines={3}>{desc}</Text>
                     <View style={styles.card_buttons}>
                         <HorizontalCardJoinButton />
                         <HorizontalCardEventButton  />

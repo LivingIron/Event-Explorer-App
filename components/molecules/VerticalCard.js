@@ -2,15 +2,15 @@ import React from "react";
 import { StyleSheet,View,Image ,Text} from "react-native";
 import VerticalCardEventButton from "../shared/VerticalCardEventButton";
 
-export default function VerticalCard(){
+export default function VerticalCard({uri,date,name}){
 
     return (
        <>
             <View style={styles.card}>
-                <Image source={{uri:'https://s1.ticketm.net/dam/a/776/6e685963-bebc-4e28-80e5-db72b4915776_1339921_CUSTOM.jpg',}} style={styles.card_image}/>
+                <Image source={{uri:uri,}} style={styles.card_image}/>
                 <View>
-                    <Text style={styles.card_date}>Oct 15,2021</Text>
-                    <Text style={styles.card_title}>Tour of the Alps</Text>
+                    <Text style={styles.card_date} >{date}</Text>
+                    <Text style={styles.card_title} numberOfLines={1}>{name}</Text>
                 </View>
                 <VerticalCardEventButton />
             </View>

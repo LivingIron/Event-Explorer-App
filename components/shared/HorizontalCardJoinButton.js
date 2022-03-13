@@ -13,9 +13,7 @@ export default function HorizontalCardJoinButton(){
             setJoined(false);
         }
     }
-
-
-
+    
     if(joined==false){
         return (
             <>
